@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
+import 'package:minimalist_social_app/core/widgets/text_widget.dart';
 import 'package:minimalist_social_app/features/auth/presentation/widgets/form_button.dart';
-import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_mode_bloc.dart';
 
 class EmailSentScreen extends StatefulWidget {
   const EmailSentScreen({super.key});
@@ -32,43 +32,25 @@ class _EmailSentScreenState extends State<EmailSentScreen> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Transform.scale(
-                    scale: .8,
-                    child: BlocBuilder<DarkModeBloc, DarkModeState>(
-                        builder: (context, state) {
-                      return state is DarkModeCurrentState
-                          ? Switch(
-                              activeColor: Colors.black,
-                              activeThumbImage:
-                                  const AssetImage("images/moon.png"),
-                              inactiveThumbImage:
-                                  const AssetImage("images/sun.png"),
-                              activeTrackColor:
-                                  const Color.fromARGB(255, 20, 20, 20),
-                              value: state.isDark,
-                              onChanged: (value) {
-                                context.read<DarkModeBloc>().add(
-                                    ToggleDarkModeEvent(isDark: !state.isDark));
-                              },
-                            )
-                          : const SizedBox();
-                    }),
-                  ),
-                  Lottie.asset('images/email_sent.json'),
-                  FormButton(
-                    label: "Login",
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              ),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0).copyWith(top: 0),
+            child: Column(
+              children: [
+                Lottie.asset('images/email_sent.json'),
+                TextWidget(
+                  text:
+                      "A password reset link has been sent to your email. Reset your password and then come back to log in.",
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  textAlign: TextAlign.center,
+                ),
+                const Gap(20),
+                FormButton(
+                  label: "Login",
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                )
+              ],
             ),
           ),
         ),
