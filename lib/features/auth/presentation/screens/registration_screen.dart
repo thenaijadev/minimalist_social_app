@@ -3,7 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:minimalist_social_app/config/router/routes.dart';
 import 'package:minimalist_social_app/core/validator/validator.dart';
+import 'package:minimalist_social_app/core/widgets/loading_widget.dart';
+import 'package:minimalist_social_app/core/widgets/snackbar.dart';
 import 'package:minimalist_social_app/core/widgets/text_widget.dart';
+import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:minimalist_social_app/features/auth/presentation/widgets/form_button.dart';
 import 'package:minimalist_social_app/features/auth/presentation/widgets/input_field_widget.dart';
 import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_mode_bloc.dart';
@@ -184,9 +187,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ],
                   ),
-                  FormButton(
-                    label: "Register",
-                    onTap: () {},
+                  BlocConsumer<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthStateAuthError) {
+                        InfoSnackBar.showErrorSnackBar(
+                            context, state.authError.message);
+                      }
+                    },
+                    builder: (context, state) {
+                      return state is AuthStateIsLoading
+                          ? const LoadingWidget()
+                          : FormButton(
+                              label: "Register",
+                              onTap: () {
+                                if (emailState! && confirmPasswordState!) {
+                                  context.read<AuthBloc>().add(
+                                      AuthEventCreateUser(
+                                          email: emailKey.currentState?.value,
+                                          password:
+                                              passwordKey.currentState?.value));
+                                }
+                              },
+                            );
+                    },
                   ),
                   const Gap(20),
                   Row(
