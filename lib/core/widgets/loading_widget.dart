@@ -1,4 +1,3 @@
-import 'package:minimalist_social_app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -9,7 +8,7 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: SpinKitWaveSpinner(
-      color: AppColors.orange,
+      color: Theme.of(context).colorScheme.inversePrimary,
       size: size,
     ));
   }

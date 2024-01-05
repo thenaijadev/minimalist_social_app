@@ -3,6 +3,7 @@ import 'package:minimalist_social_app/config/router/routes.dart';
 import 'package:minimalist_social_app/core/widgets/error_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/registration_screen.dart';
+import 'package:minimalist_social_app/features/auth/presentation/screens/forgot_password_screen.dart';
 
 class AppRouter {
   Route onGenerateRoute(RouteSettings routeSettings) {
@@ -16,7 +17,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const RegistrationScreen(),
         );
-
+      case Routes.forgotPassword:
+        return MaterialPageRoute(
+          builder: (_) => const ForgotPasswordScreen(),
+        );
       // case Routes.registration:
       //   return MaterialPageRoute(
       //     builder: (_) => const RegistrationScreen(),

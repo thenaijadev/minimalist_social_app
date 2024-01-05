@@ -1,5 +1,5 @@
-import 'package:minimalist_social_app/core/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:minimalist_social_app/core/widgets/text_widget.dart';
 
 class InfoSnackBar {
   static SnackBar successSnackBar(String message) {
@@ -76,7 +76,7 @@ class InfoSnackBar {
                 const SizedBox(
                   width: 20,
                 ),
-                Image.asset("assets/images/right_chevron.png")
+                Image.asset("images/right_chevron.png")
               ],
             ),
           ),
@@ -99,7 +99,7 @@ class InfoSnackBar {
           children: [
             Flexible(
               flex: 1,
-              child: Image.asset("assets/images/caution.png"),
+              child: Image.asset("images/caution.png"),
             ),
             const SizedBox(
               width: 20,
