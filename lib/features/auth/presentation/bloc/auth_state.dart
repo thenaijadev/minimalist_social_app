@@ -44,8 +44,8 @@ class AuthStateAuthError extends AuthState {
   });
 }
 
-class AuthStateEmailSent extends AuthState {
-  const AuthStateEmailSent();
+class AuthStateEmailVerificationLinkSent extends AuthState {
+  const AuthStateEmailVerificationLinkSent();
 }
 
 class AuthStatePasswordResetSent extends AuthState {

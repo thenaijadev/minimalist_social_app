@@ -12,20 +12,6 @@ class EmailSentScreen extends StatefulWidget {
 }
 
 class _EmailSentScreenState extends State<EmailSentScreen> {
-  final formKey = GlobalKey<FormState>();
-  final emailKey = GlobalKey<FormFieldState>();
-  final usernameKey = GlobalKey<FormFieldState>();
-
-  final passwordKey = GlobalKey<FormFieldState>();
-  final confirmPasswordKey = GlobalKey<FormFieldState>();
-
-  bool? emailState = false;
-  bool? passwordState = false;
-  bool? confirmPasswordState = false;
-  bool? usernameState = false;
-
-  bool enabled = false;
-  bool obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

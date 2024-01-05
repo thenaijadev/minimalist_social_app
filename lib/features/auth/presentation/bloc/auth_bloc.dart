@@ -59,7 +59,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthEventSendEmailVerification>((event, emit) async {
       final authUser = await authUsecase.sendEmailVerification();
       authUser.fold((l) => AuthError(message: l.message), (r) {
-        emit(const AuthStateEmailSent());
+        emit(const AuthStateEmailVerificationLinkSent());
       });
     });
 

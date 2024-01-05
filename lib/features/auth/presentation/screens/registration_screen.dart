@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:minimalist_social_app/config/router/routes.dart';
 import 'package:minimalist_social_app/core/utils/logger.dart';
 import 'package:minimalist_social_app/core/validator/validator.dart';
 import 'package:minimalist_social_app/core/widgets/loading_widget.dart';
@@ -178,8 +179,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             context, state.authError.message);
                       }
                       if (state is AuthStateUserCreated) {
-                        InfoSnackBar.showSuccessSnackBar(
-                            context, "'${state.user.email}' user created ");
+                        Navigator.pushNamed(context, Routes.emailVerification);
                       }
                     },
                     builder: (context, state) {
