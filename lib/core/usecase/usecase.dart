@@ -10,6 +10,7 @@ abstract class UseCase<Type> {
     required String email,
     required String password,
   });
+  FutureEitherAuthUserOrAuthError getcurrentUser();
 
   EitherFutureTrueOrAuthError logOut();
   EitherFutureTrueOrAuthError sendEmailVerification();

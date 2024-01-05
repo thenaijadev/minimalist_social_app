@@ -6,6 +6,8 @@ import 'package:minimalist_social_app/core/utils/typedef.dart';
 import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.dart';
 
 abstract class FirebaseAuthService {
+  EitherAuthUserOrAuthError getCurrentUser();
+
   FutureEitherAuthUserOrAuthError createUser({
     required String email,
     required String password,
@@ -125,5 +127,10 @@ class FirebaseAuthServiceImlementation implements FirebaseAuthService {
     } catch (e) {
       return left(AuthError(message: e.toString()));
     }
+  }
+
+  @override
+  EitherAuthUserOrAuthError getCurrentUser() {
+    return currentUser;
   }
 }

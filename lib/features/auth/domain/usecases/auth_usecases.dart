@@ -36,4 +36,9 @@ class AuthUsecase implements UseCase<AuthUserEntity> {
   EitherFutureTrueOrAuthError sendPasswordReset({required String toEmail}) {
     return authRepository.sendPasswordReset(toEmail: toEmail);
   }
+
+  @override
+  FutureEitherAuthUserOrAuthError getcurrentUser() {
+    return authRepository.getcurrentUser();
+  }
 }

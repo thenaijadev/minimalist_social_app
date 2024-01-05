@@ -22,6 +22,15 @@ class FirebaseAuthRepositoryImplementation implements FirebaseAuthRepository {
   }
 
   @override
+  FutureEitherAuthUserOrAuthError getcurrentUser() async {
+    if (await networkInfo.isConnected!) {
+      return authService.getCurrentUser();
+    }
+
+    return localAuthUserSource.getUser();
+  }
+
+  @override
   FutureEitherAuthUserOrAuthError logIn(
       {required String email, required String password}) async {
     final user = authService.logIn(email: email, password: password);

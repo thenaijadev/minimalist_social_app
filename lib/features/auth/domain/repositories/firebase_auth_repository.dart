@@ -6,6 +6,8 @@ abstract class FirebaseAuthRepository {
     required String password,
   });
 
+  FutureEitherAuthUserOrAuthError getcurrentUser();
+
   FutureEitherAuthUserOrAuthError logIn({
     required String email,
     required String password,
