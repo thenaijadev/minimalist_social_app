@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minimalist_social_app/config/router/routes.dart';
 import 'package:minimalist_social_app/core/widgets/error_screen.dart';
+import 'package:minimalist_social_app/features/auth/presentation/screens/email_sent_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/registration_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/forgot_password_screen.dart';
@@ -20,6 +21,10 @@ class AppRouter {
       case Routes.forgotPassword:
         return MaterialPageRoute(
           builder: (_) => const ForgotPasswordScreen(),
+        );
+      case Routes.emailSent:
+        return MaterialPageRoute(
+          builder: (_) => const EmailSentScreen(),
         );
       // case Routes.registration:
       //   return MaterialPageRoute(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:minimalist_social_app/config/router/routes.dart';
+import 'package:lottie/lottie.dart';
 import 'package:minimalist_social_app/core/validator/validator.dart';
 import 'package:minimalist_social_app/core/widgets/loading_widget.dart';
 import 'package:minimalist_social_app/core/widgets/snackbar.dart';
@@ -10,14 +10,14 @@ import 'package:minimalist_social_app/features/auth/presentation/widgets/form_bu
 import 'package:minimalist_social_app/features/auth/presentation/widgets/input_field_widget.dart';
 import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_mode_bloc.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class EmailSentScreen extends StatefulWidget {
+  const EmailSentScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<EmailSentScreen> createState() => _EmailSentScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _EmailSentScreenState extends State<EmailSentScreen> {
   final formKey = GlobalKey<FormState>();
   final emailKey = GlobalKey<FormFieldState>();
   final usernameKey = GlobalKey<FormFieldState>();
@@ -66,9 +66,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           : const SizedBox();
                     }),
                   ),
-                  Icon(Icons.person,
-                      size: 80,
-                      color: Theme.of(context).colorScheme.inversePrimary),
+                  Lottie.asset('images/email_sent.json'),
                   const Gap(
                     25,
                   ),
@@ -97,7 +95,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             context, state.authError.message);
                       }
                       if (state is AuthStatePasswordResetSent) {
-                        Navigator.of(context).popAndPushNamed(Routes.emailSent);
+                        Navigator.of(context).pop();
                       }
                     },
                     builder: (context, state) {
