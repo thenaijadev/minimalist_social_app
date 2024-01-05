@@ -33,12 +33,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthEventLogin>((event, emit) async {
+      emit(const AuthStateIsLoading());
       final String email = event.email;
       final String password = event.password;
 
       final authUser =
           await authUsecase.logIn(email: email, password: password);
-      authUser.fold((l) => AuthError(message: l.message), (r) {
+      authUser.fold(
+          (l) => emit(
+              AuthStateAuthError(authError: AuthError(message: l.message))),
+          (r) {
         emit(AuthStateIsLoggedIn(user: r));
       });
     });
