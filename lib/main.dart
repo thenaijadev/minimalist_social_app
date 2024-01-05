@@ -9,7 +9,7 @@ import 'package:minimalist_social_app/config/router/routes.dart';
 import 'package:minimalist_social_app/config/theme/dark_theme.dart';
 import 'package:minimalist_social_app/config/theme/light_theme.dart';
 import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_mode_bloc.dart';
-import 'package:minimalist_social_app/firebase_options.dart';
+import 'package:minimalist_social_app/core/firebase/firebase_options.dart';
 
 void main() async {
   appInitialization();

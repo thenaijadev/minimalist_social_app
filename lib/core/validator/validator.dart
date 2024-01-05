@@ -43,7 +43,8 @@ class Validator {
     return null;
   }
 
-  static String? validateConfirmPassword(String? value, String firstPassword) {
+  static String? validateConfirmPassword(
+      {String? value, required String firstPassword}) {
     if (value != null && value != firstPassword) {
       return "Password doesn't match!";
     } else {

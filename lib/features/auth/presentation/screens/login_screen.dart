@@ -133,21 +133,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {},
                   ),
                   const Gap(20),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flexible(
                         child: TextWidget(
                           fontWeight: FontWeight.w300,
                           text: "Dont have an account?",
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       TextWidget(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(Routes.register);
+                        },
                         fontWeight: FontWeight.bold,
                         text: "Register",
+                        color: Theme.of(context).colorScheme.inversePrimary,
                       ),
                     ],
                   ),

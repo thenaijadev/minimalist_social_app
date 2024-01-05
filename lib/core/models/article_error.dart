@@ -1,4 +1,4 @@
-class ArticleError {
-  ArticleError({required this.message});
+class AuthError {
+  AuthError({required this.message});
   final String message;
 }

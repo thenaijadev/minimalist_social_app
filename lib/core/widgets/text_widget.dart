@@ -11,21 +11,26 @@ class TextWidget extends StatelessWidget {
       this.fontWeight = FontWeight.normal,
       this.color = AppColors.black,
       this.textAlign,
-      this.overflow});
+      this.overflow,
+      this.onTap});
   final String text;
   final double fontSize;
   final FontWeight fontWeight;
+  final VoidCallback? onTap;
   final Color color;
   final TextAlign? textAlign;
   final TextOverflow? overflow;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      textAlign: textAlign,
-      overflow: overflow,
-      style: GoogleFonts.poppins(
-          color: color, fontSize: fontSize, fontWeight: fontWeight),
+    return GestureDetector(
+      onTap: onTap,
+      child: Text(
+        text,
+        textAlign: textAlign,
+        overflow: overflow,
+        style: GoogleFonts.poppins(
+            color: color, fontSize: fontSize, fontWeight: fontWeight),
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minimalist_social_app/config/router/routes.dart';
 import 'package:minimalist_social_app/core/widgets/error_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:minimalist_social_app/features/auth/presentation/screens/registration_screen.dart';
 
 class AppRouter {
   Route onGenerateRoute(RouteSettings routeSettings) {
@@ -13,7 +14,7 @@ class AppRouter {
         );
       case Routes.register:
         return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+          builder: (_) => const RegistrationScreen(),
         );
 
       // case Routes.registration:
