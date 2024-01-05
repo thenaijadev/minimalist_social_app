@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
-import 'package:minimalist_social_app/core/validator/validator.dart';
-import 'package:minimalist_social_app/core/widgets/loading_widget.dart';
-import 'package:minimalist_social_app/core/widgets/snackbar.dart';
-import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:minimalist_social_app/features/auth/presentation/widgets/form_button.dart';
-import 'package:minimalist_social_app/features/auth/presentation/widgets/input_field_widget.dart';
 import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_mode_bloc.dart';
 
 class EmailSentScreen extends StatefulWidget {
@@ -67,54 +61,12 @@ class _EmailSentScreenState extends State<EmailSentScreen> {
                     }),
                   ),
                   Lottie.asset('images/email_sent.json'),
-                  const Gap(
-                    25,
-                  ),
-                  InputFieldWidget(
-                    textFieldkey: emailKey,
-                    label: "Your email address",
-                    hintText: "e.g:mark@gmail.com",
-                    onChanged: (val) {
-                      setState(() {
-                        emailState = emailKey.currentState?.validate();
-                      });
+                  FormButton(
+                    label: "Login",
+                    onTap: () {
+                      Navigator.pop(context);
                     },
-                    validator: (val) {
-                      final emailState =
-                          Validator.validateEmail(emailKey.currentState?.value);
-                      return emailState;
-                    },
-                    enabledBorderRadius: 10,
-                    hintColor: Theme.of(context).colorScheme.secondary,
-                  ),
-                  const Gap(25),
-                  BlocConsumer<AuthBloc, AuthState>(
-                    listener: (context, state) {
-                      if (state is AuthStateAuthError) {
-                        InfoSnackBar.showErrorSnackBar(
-                            context, state.authError.message);
-                      }
-                      if (state is AuthStatePasswordResetSent) {
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    builder: (context, state) {
-                      return state is AuthStateIsLoading
-                          ? const LoadingWidget()
-                          : FormButton(
-                              label: "Send reset instructions",
-                              onTap: () {
-                                if (emailState!) {
-                                  context.read<AuthBloc>().add(
-                                        AuthEventSendPasswordReset(
-                                          toEmail: emailKey.currentState?.value,
-                                        ),
-                                      );
-                                }
-                              },
-                            );
-                    },
-                  ),
+                  )
                 ],
               ),
             ),
