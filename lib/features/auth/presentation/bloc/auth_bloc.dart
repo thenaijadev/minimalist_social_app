@@ -41,8 +41,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           await authUsecase.logIn(email: email, password: password);
       authUser.fold(
           (l) => emit(
-              AuthStateAuthError(authError: AuthError(message: l.message))),
-          (r) {
+                AuthStateAuthError(
+                  authError: AuthError(message: l.message),
+                ),
+              ), (r) {
         emit(AuthStateIsLoggedIn(user: r));
       });
     });

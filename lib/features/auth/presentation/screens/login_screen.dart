@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:minimalist_social_app/config/router/routes.dart';
+import 'package:minimalist_social_app/core/utils/logger.dart';
 import 'package:minimalist_social_app/core/validator/validator.dart';
 import 'package:minimalist_social_app/core/widgets/loading_widget.dart';
 import 'package:minimalist_social_app/core/widgets/snackbar.dart';
@@ -102,13 +103,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: "e.g: Password5&",
                     onChanged: (val) {
                       setState(() {
-                        emailState = passwordKey.currentState?.validate();
+                        passwordState = passwordKey.currentState?.validate();
                       });
                     },
                     validator: (val) {
-                      final emailState = Validator.validatePassword(
+                      final passwordState = Validator.validatePassword(
                           passwordKey.currentState?.value);
-                      return emailState;
+                      return passwordState;
                     },
                     enabledBorderRadius: 10,
                     hintColor: Theme.of(context).colorScheme.secondary,
@@ -137,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         InfoSnackBar.showErrorSnackBar(
                             context, state.authError.message);
                       }
-                      if (state is AuthStateUserCreated) {
+                      if (state is AuthStateIsLoggedIn) {
                         InfoSnackBar.showSuccessSnackBar(
                             context, "'${state.user.email}' user created ");
                       }
@@ -148,6 +149,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           : FormButton(
                               label: "Login",
                               onTap: () {
+                                logger.e(passwordState);
+                                logger.e(emailState);
+
                                 if (emailState! && passwordState!) {
                                   context.read<AuthBloc>().add(AuthEventLogin(
                                       email: emailKey.currentState?.value,
