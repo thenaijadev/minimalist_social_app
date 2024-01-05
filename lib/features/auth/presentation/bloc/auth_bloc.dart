@@ -11,6 +11,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required AuthUsecase authUsecase})
       : super(AuthStateIsNotLoggedIn()) {
     on<AuthEventGetCurrentUser>((event, emit) async {
+      emit(const AuthStateIsLoading());
+
       final authUser = await authUsecase.getcurrentUser();
       authUser.fold((l) => AuthError(message: l.message), (r) {
         emit(AuthStateIsLoggedIn(user: r));
@@ -50,6 +52,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthEventLogout>((event, emit) async {
+      emit(const AuthStateIsLoading());
+
       final authUser = await authUsecase.logOut();
       authUser.fold((l) => AuthError(message: l.message), (r) {
         emit(AuthStateIsNotLoggedIn());
@@ -57,6 +61,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthEventSendEmailVerification>((event, emit) async {
+      emit(const AuthStateIsLoading());
       final authUser = await authUsecase.sendEmailVerification();
       authUser.fold((l) => AuthError(message: l.message), (r) {
         emit(const AuthStateEmailVerificationLinkSent());
