@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.pushNamed(context, Routes.forgotPassword);
                         },
                         child: Text(
-                          "Reset Password",
+                          "Forgot Password",
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.secondary,
                             fontSize: 14,

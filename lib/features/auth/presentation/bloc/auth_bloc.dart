@@ -58,9 +58,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthEventSendPasswordReset>((event, emit) async {
+      emit(const AuthStateIsLoading());
       final toEmail = event.toEmail;
       final authUser = await authUsecase.sendPasswordReset(toEmail: toEmail);
-      authUser.fold((l) => AuthError(message: l.message), (r) {
+      authUser.fold(
+          (l) => emit(
+              AuthStateAuthError(authError: AuthError(message: l.message))),
+          (r) {
         emit(const AuthStatePasswordResetSent());
       });
     });
