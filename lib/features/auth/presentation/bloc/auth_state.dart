@@ -17,6 +17,16 @@ class AuthStateIsLoggedIn extends AuthState {
   });
 
   @override
+  List<Object> get props => [user];
+}
+
+class AuthStateUserCreated extends AuthState {
+  final AuthUserEntity user;
+  const AuthStateUserCreated({
+    required this.user,
+  });
+
+  @override
   List<Object> get props => [];
 }
 

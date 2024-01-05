@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:minimalist_social_app/config/router/routes.dart';
+import 'package:minimalist_social_app/core/utils/logger.dart';
 import 'package:minimalist_social_app/core/validator/validator.dart';
 import 'package:minimalist_social_app/core/widgets/loading_widget.dart';
 import 'package:minimalist_social_app/core/widgets/snackbar.dart';
@@ -193,6 +194,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         InfoSnackBar.showErrorSnackBar(
                             context, state.authError.message);
                       }
+                      if (state is AuthStateUserCreated) {
+                        InfoSnackBar.showSuccessSnackBar(
+                            context, "'${state.user.email}' user created ");
+                      }
                     },
                     builder: (context, state) {
                       return state is AuthStateIsLoading
@@ -200,6 +205,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           : FormButton(
                               label: "Register",
                               onTap: () {
+                                logger.e(emailState);
+                                logger.e(confirmPasswordState);
+
                                 if (emailState! && confirmPasswordState!) {
                                   context.read<AuthBloc>().add(
                                       AuthEventCreateUser(
