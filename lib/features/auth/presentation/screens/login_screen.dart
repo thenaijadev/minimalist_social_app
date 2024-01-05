@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       return state is AuthStateIsLoading
                           ? const LoadingWidget()
                           : FormButton(
-                              label: "Register",
+                              label: "Login",
                               onTap: () {
                                 if (emailState! && passwordState!) {
                                   context.read<AuthBloc>().add(AuthEventLogin(
