@@ -14,7 +14,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(const AuthStateIsLoading());
 
       final authUser = await authUsecase.getcurrentUser();
-      authUser.fold((l) => AuthError(message: l.message), (r) {
+      authUser.fold((l) {
+        emit(AuthStateAuthError(authError: AuthError(message: l.message)));
+      }, (r) {
         emit(AuthStateIsLoggedIn(user: r));
       });
     });

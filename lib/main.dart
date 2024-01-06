@@ -20,14 +20,15 @@ import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   appInitialization();
   runApp(const MyApp());
 }
 
 appInitialization() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
   SystemChrome.setPreferredOrientations([
@@ -75,7 +76,7 @@ class MyApp extends StatelessWidget {
                 theme: state.isDark ? darkTheme() : lightTheme(),
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
-                initialRoute: Routes.login,
+                initialRoute: Routes.landing,
                 onGenerateRoute: appRouter.onGenerateRoute,
               );
             }

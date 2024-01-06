@@ -4,6 +4,8 @@ import 'package:minimalist_social_app/core/widgets/error_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/email_sent_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/email_verification_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/forgot_password_screen.dart';
+import 'package:minimalist_social_app/features/auth/presentation/screens/home_screen.dart';
+import 'package:minimalist_social_app/features/auth/presentation/screens/landing_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/registration_screen.dart';
 
@@ -14,6 +16,10 @@ class AppRouter {
       case Routes.login:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
+        );
+      case Routes.landing:
+        return MaterialPageRoute(
+          builder: (_) => const LandingScreen(),
         );
       case Routes.register:
         return MaterialPageRoute(
@@ -30,6 +36,11 @@ class AppRouter {
       case Routes.emailVerification:
         return MaterialPageRoute(
           builder: (_) => const EmailVerificationScreen(),
+        );
+
+      case Routes.home:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
         );
       // case Routes.registration:
       //   return MaterialPageRoute(
