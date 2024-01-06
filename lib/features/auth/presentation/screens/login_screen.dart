@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:minimalist_social_app/config/router/routes.dart';
-import 'package:minimalist_social_app/core/utils/logger.dart';
 import 'package:minimalist_social_app/core/validator/validator.dart';
 import 'package:minimalist_social_app/core/widgets/loading_widget.dart';
 import 'package:minimalist_social_app/core/widgets/snackbar.dart';
@@ -139,6 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             context, state.authError.message);
                       }
                       if (state is AuthStateIsLoggedIn) {
+                        if (state.user.isEmailVerified == false) {
+                          Navigator.pushReplacementNamed(
+                              context, Routes.emailVerification);
+                          // logger.e(state.user.isEmailVerified);
+                        }
                         InfoSnackBar.showSuccessSnackBar(
                             context, "'${state.user.email}' user created ");
                       }
@@ -149,9 +153,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           : FormButton(
                               label: "Login",
                               onTap: () {
-                                logger.e(passwordState);
-                                logger.e(emailState);
-
                                 if (emailState! && passwordState!) {
                                   context.read<AuthBloc>().add(AuthEventLogin(
                                       email: emailKey.currentState?.value,
