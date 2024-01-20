@@ -30,6 +30,9 @@ class MyDrawer extends StatelessWidget {
               onTap: () => Navigator.pop(context),
             ),
             ListTile(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.profile);
+              },
               leading: Icon(
                 Icons.person,
                 color: Theme.of(context).colorScheme.inversePrimary,
@@ -39,9 +42,11 @@ class MyDrawer extends StatelessWidget {
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
               ),
-              onTap: () => Navigator.pop(context),
             ),
             ListTile(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.users);
+              },
               leading: Icon(
                 Icons.group,
                 color: Theme.of(context).colorScheme.inversePrimary,
@@ -62,6 +67,9 @@ class MyDrawer extends StatelessWidget {
                 return state is AuthStateIsLoading
                     ? const LoadingWidget()
                     : ListTile(
+                        onTap: () {
+                          context.read<AuthBloc>().add(const AuthEventLogout());
+                        },
                         leading: Icon(
                           Icons.logout,
                           color: Theme.of(context).colorScheme.inversePrimary,
