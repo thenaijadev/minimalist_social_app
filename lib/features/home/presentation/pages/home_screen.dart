@@ -17,26 +17,6 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         actions: [
-          BlocConsumer<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state is AuthStateIsNotLoggedIn) {
-                Navigator.popAndPushNamed(context, Routes.landing);
-              }
-            },
-            builder: (context, state) {
-              return state is AuthStateIsLoading
-                  ? const LoadingWidget()
-                  : IconButton(
-                      onPressed: () {
-                        context.read<AuthBloc>().add(const AuthEventLogout());
-                      },
-                      icon: Icon(
-                        Icons.logout,
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                    );
-            },
-          ),
           const DarkModeSwitch(),
         ],
         backgroundColor: Theme.of(context).colorScheme.background,
