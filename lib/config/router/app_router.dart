@@ -4,7 +4,7 @@ import 'package:minimalist_social_app/core/widgets/error_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/email_sent_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/email_verification_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/forgot_password_screen.dart';
-import 'package:minimalist_social_app/features/auth/presentation/screens/home_screen.dart';
+import 'package:minimalist_social_app/features/home/presentation/pages/home_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/landing_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/registration_screen.dart';
