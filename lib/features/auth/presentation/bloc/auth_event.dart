@@ -11,10 +11,10 @@ abstract class AuthEvent extends Equatable {
 class AuthEventCreateUser extends AuthEvent {
   final String email;
   final String password;
-  const AuthEventCreateUser({
-    required this.email,
-    required this.password,
-  });
+  final String userName;
+
+  const AuthEventCreateUser(
+      {required this.email, required this.password, required this.userName});
 }
 
 class AuthEventLogin extends AuthEvent {

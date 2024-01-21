@@ -11,12 +11,6 @@ class AuthUsecase implements UseCase<AuthUserEntity> {
   });
 
   @override
-  FutureEitherAuthUserOrAuthError createUser(
-      {required String email, required String password}) {
-    return authRepository.createUser(email: email, password: password);
-  }
-
-  @override
   FutureEitherAuthUserOrAuthError logIn(
       {required String email, required String password}) {
     return authRepository.logIn(email: email, password: password);
@@ -40,5 +34,15 @@ class AuthUsecase implements UseCase<AuthUserEntity> {
   @override
   FutureEitherAuthUserOrAuthError getcurrentUser() {
     return authRepository.getcurrentUser();
+  }
+
+  @override
+  FutureEitherAuthUserOrAuthError createUser({
+    required String email,
+    required String password,
+    required String userName,
+  }) {
+    return authRepository.createUser(
+        email: email, password: password, userName: userName);
   }
 }

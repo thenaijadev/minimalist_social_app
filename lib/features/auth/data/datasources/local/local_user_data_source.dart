@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:minimalist_social_app/core/Models/article_error.dart';
+import 'package:minimalist_social_app/core/errors/auth_error.dart';
 import 'package:minimalist_social_app/core/utils/typedef.dart';
 import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,17 +14,16 @@ abstract class AuthUserLocalDataSource {
   EitherFutureTrueOrAuthError deleteUser();
 }
 
-const cachedPokemon = 'CACHED_AUTHUSER';
-
 class AuthUserLocalDataSourceImpl implements AuthUserLocalDataSource {
   final Future<SharedPreferences> sharedPreferences;
-
-  AuthUserLocalDataSourceImpl({required this.sharedPreferences});
+  final String cachedUser;
+  AuthUserLocalDataSourceImpl(
+      {required this.sharedPreferences, this.cachedUser = 'CACHED_AUTHUSER'});
 
   @override
   FutureEitherLocalAuthUserOrAuthError getUser() async {
     final preferences = await sharedPreferences;
-    final jsonString = preferences.getString(cachedPokemon);
+    final jsonString = preferences.getString(cachedUser);
 
     if (jsonString != null) {
       final newsArticleModel =
@@ -46,7 +45,7 @@ class AuthUserLocalDataSourceImpl implements AuthUserLocalDataSource {
           message: "There has been an error saving articles locally"));
     }, (r) async {
       final isSaved = await preferences.setString(
-        cachedPokemon,
+        cachedUser,
         json.encode(
           r.toJson(),
         ),
@@ -62,7 +61,7 @@ class AuthUserLocalDataSourceImpl implements AuthUserLocalDataSource {
   EitherFutureTrueOrAuthError deleteUser() async {
     try {
       final preferences = await sharedPreferences;
-      bool isDeleted = await preferences.remove(cachedPokemon);
+      bool isDeleted = await preferences.remove(cachedUser);
       return right(isDeleted);
     } catch (e) {
       return left(AuthError(

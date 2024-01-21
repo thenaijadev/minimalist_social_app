@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:minimalist_social_app/core/Models/article_error.dart';
+import 'package:minimalist_social_app/core/errors/auth_error.dart';
+import 'package:minimalist_social_app/core/errors/user_error.dart';
+
 import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.dart';
 
 // typedef FutureEitherArticleOrException
@@ -9,6 +11,8 @@ import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.
 
 typedef EitherAuthUserOrAuthError = Either<AuthError, AuthUserModel>;
 typedef EitherTrueOrAuthError = Either<AuthError, bool>;
+typedef EitherTrueOrUserError = Future<Either<UserError, bool>>;
+
 typedef EitherFutureTrueOrAuthError = Future<Either<AuthError, bool>>;
 
 typedef FutureEitherAuthUserOrAuthError

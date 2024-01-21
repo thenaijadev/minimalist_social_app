@@ -196,7 +196,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       AuthEventCreateUser(
                                           email: emailKey.currentState?.value,
                                           password:
-                                              passwordKey.currentState?.value));
+                                              passwordKey.currentState?.value,
+                                          userName:
+                                              usernameKey.currentState!.value));
                                 }
                               },
                             );

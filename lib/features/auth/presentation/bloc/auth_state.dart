@@ -21,7 +21,7 @@ class AuthStateIsLoggedIn extends AuthState {
 }
 
 class AuthStateUserCreated extends AuthState {
-  final AuthUserEntity user;
+  final AuthUserModel user;
   const AuthStateUserCreated({
     required this.user,
   });

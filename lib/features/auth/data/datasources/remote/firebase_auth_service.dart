@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:minimalist_social_app/core/Models/article_error.dart';
+import 'package:minimalist_social_app/core/errors/auth_error.dart';
 import 'package:minimalist_social_app/core/utils/logger.dart';
 import 'package:minimalist_social_app/core/utils/typedef.dart';
 import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.dart';
@@ -8,10 +8,10 @@ import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.
 abstract class FirebaseAuthService {
   EitherAuthUserOrAuthError getCurrentUser();
 
-  FutureEitherAuthUserOrAuthError createUser({
-    required String email,
-    required String password,
-  });
+  FutureEitherAuthUserOrAuthError createUser(
+      {required String email,
+      required String password,
+      required String userName});
 
   FutureEitherAuthUserOrAuthError logIn({
     required String email,
@@ -28,17 +28,19 @@ class FirebaseAuthServiceImlementation implements FirebaseAuthService {
     final user = FirebaseAuth.instance.currentUser;
     logger.e(user.toString());
     if (user != null) {
-      return right(AuthUserModel.fromFirebase(user));
+      return right(AuthUserModel.fromFirebase(
+        user,
+      ));
     } else {
       return left(AuthError(message: "There is no current user"));
     }
   }
 
   @override
-  FutureEitherAuthUserOrAuthError createUser({
-    required String email,
-    required String password,
-  }) async {
+  FutureEitherAuthUserOrAuthError createUser(
+      {required String email,
+      required String password,
+      required String userName}) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,

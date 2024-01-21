@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:minimalist_social_app/core/models/article_error.dart';
+import 'package:minimalist_social_app/core/errors/auth_error.dart';
+import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.dart';
 import 'package:minimalist_social_app/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:minimalist_social_app/features/auth/domain/usecases/auth_usecases.dart';
 
@@ -8,8 +9,9 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc({required AuthUsecase authUsecase})
-      : super(AuthStateIsNotLoggedIn()) {
+  AuthBloc({
+    required AuthUsecase authUsecase,
+  }) : super(AuthStateIsNotLoggedIn()) {
     on<AuthEventGetCurrentUser>((event, emit) async {
       emit(const AuthStateIsLoading());
 
@@ -25,13 +27,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(const AuthStateIsLoading());
       final String email = event.email;
       final String password = event.password;
+      final String userName = event.userName;
 
-      final authUser =
-          await authUsecase.createUser(email: email, password: password);
+      final authUser = await authUsecase.createUser(
+          email: email, password: password, userName: userName);
       authUser.fold(
           (l) => emit(
               AuthStateAuthError(authError: AuthError(message: l.message))),
-          (r) {
+          (r) async {
         emit(AuthStateUserCreated(user: r));
       });
     });

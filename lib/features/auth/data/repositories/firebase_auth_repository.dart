@@ -15,8 +15,11 @@ class FirebaseAuthRepositoryImplementation implements FirebaseAuthRepository {
   });
   @override
   FutureEitherAuthUserOrAuthError createUser(
-      {required String email, required String password}) async {
-    final user = authService.createUser(email: email, password: password);
+      {required String email,
+      required String password,
+      required String userName}) async {
+    final user = authService.createUser(
+        email: email, password: password, userName: userName);
     await localAuthUserSource.saveUser(user);
     return user;
   }

@@ -10,7 +10,10 @@ class AuthUserModel extends AuthUserEntity {
     required super.email,
     required super.isEmailVerified,
   });
-  factory AuthUserModel.fromFirebase(User user) => AuthUserModel(
+  factory AuthUserModel.fromFirebase(
+    User user,
+  ) =>
+      AuthUserModel(
         id: user.uid,
         email: user.email!,
         isEmailVerified: user.emailVerified,
