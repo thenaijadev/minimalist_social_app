@@ -2,16 +2,16 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:minimalist_social_app/core/errors/auth_error.dart';
+import 'package:minimalist_social_app/core/errors/user_error.dart';
 import 'package:minimalist_social_app/core/utils/typedef.dart';
-import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.dart';
+import 'package:minimalist_social_app/features/users/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthUserLocalDataSource {
-  FutureEitherAuthUserOrAuthError saveUser(
-      FutureEitherAuthUserOrAuthError user);
+  FutureEitherUserOrUserError saveUser(FutureEitherUserOrUserError user);
 
-  FutureEitherLocalAuthUserOrAuthError getUser();
-  EitherFutureTrueOrAuthError deleteUser();
+  FutureEitherLocalUserOrUserError getUser();
+  EitherFutureTrueOrUserError deleteUser();
 }
 
 class AuthUserLocalDataSourceImpl implements AuthUserLocalDataSource {
@@ -21,23 +21,22 @@ class AuthUserLocalDataSourceImpl implements AuthUserLocalDataSource {
       {required this.sharedPreferences, this.cachedUser = 'CACHED_AUTHUSER'});
 
   @override
-  FutureEitherLocalAuthUserOrAuthError getUser() async {
+  FutureEitherLocalUserOrUserError getUser() async {
     final preferences = await sharedPreferences;
     final jsonString = preferences.getString(cachedUser);
 
     if (jsonString != null) {
-      final newsArticleModel =
-          await Future.value(AuthUserModel.fromJson(json.decode(jsonString)));
+      final userModel =
+          await Future.value(UserModel.fromJson(json.decode(jsonString)));
 
-      return right(newsArticleModel);
+      return right(userModel);
     } else {
-      return left(AuthError(message: "Unable to get locally saved auth user"));
+      return left(UserError(message: "Unable to get locally saved auth user"));
     }
   }
 
   @override
-  FutureEitherAuthUserOrAuthError saveUser(
-      FutureEitherAuthUserOrAuthError user) async {
+  FutureEitherUserOrUserError saveUser(FutureEitherUserOrUserError user) async {
     final preferences = await sharedPreferences;
     final theUser = await user;
     theUser.fold((l) {
@@ -54,17 +53,17 @@ class AuthUserLocalDataSourceImpl implements AuthUserLocalDataSource {
     });
 
     return left(
-        AuthError(message: "There has been an error saving auth user locally"));
+        UserError(message: "There has been an error saving auth user locally"));
   }
 
   @override
-  EitherFutureTrueOrAuthError deleteUser() async {
+  EitherFutureTrueOrUserError deleteUser() async {
     try {
       final preferences = await sharedPreferences;
       bool isDeleted = await preferences.remove(cachedUser);
       return right(isDeleted);
     } catch (e) {
-      return left(AuthError(
+      return left(UserError(
           message: "There has been an error deleting the user locally"));
     }
   }
