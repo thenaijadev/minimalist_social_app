@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:minimalist_social_app/core/usecase/usecase.dart';
+import 'package:minimalist_social_app/core/usecase/auth_usecase.dart';
 import 'package:minimalist_social_app/core/utils/typedef.dart';
 import 'package:minimalist_social_app/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:minimalist_social_app/features/auth/domain/repositories/firebase_auth_repository.dart';
