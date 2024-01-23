@@ -3,11 +3,14 @@ import 'package:minimalist_social_app/core/usecase/auth_usecase.dart';
 import 'package:minimalist_social_app/core/utils/typedef.dart';
 import 'package:minimalist_social_app/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:minimalist_social_app/features/auth/domain/repositories/firebase_auth_repository.dart';
+import 'package:minimalist_social_app/features/auth/domain/repositories/local_auth_repository.dart';
 
 class AuthUsecase implements UseCase<AuthUserEntity> {
   final FirebaseAuthRepository authRepository;
+  final LocalAuthRepository localAuthRepository;
   AuthUsecase({
     required this.authRepository,
+    required this.localAuthRepository,
   });
 
   @override

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:minimalist_social_app/config/router/app_router.dart';
 import 'package:minimalist_social_app/config/router/routes.dart';
 import 'package:minimalist_social_app/config/theme/dark_theme.dart';
@@ -13,7 +14,9 @@ import 'package:minimalist_social_app/core/connection/network_info.dart';
 import 'package:minimalist_social_app/core/firebase/firebase_options.dart';
 import 'package:minimalist_social_app/features/auth/data/datasources/local/local_user_data_source.dart';
 import 'package:minimalist_social_app/features/auth/data/datasources/remote/firebase_auth_service.dart';
-import 'package:minimalist_social_app/features/auth/data/repositories/firebase_auth_repository.dart';
+import 'package:minimalist_social_app/features/auth/data/datasources/remote/local_auth_service.dart';
+import 'package:minimalist_social_app/features/auth/data/repositories/firebase_auth_repository_implementation.dart';
+import 'package:minimalist_social_app/features/auth/data/repositories/local_auth_repository_implementation.dart';
 import 'package:minimalist_social_app/features/auth/domain/usecases/auth_usecases.dart';
 import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_mode_bloc.dart';
@@ -56,6 +59,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => AuthBloc(
               authUsecase: AuthUsecase(
+                localAuthRepository: LocalAuthRepositoryImplementation(
+                    authService: LocalAuthServiceImplementation(
+                        auth: LocalAuthentication())),
                 authRepository: FirebaseAuthRepositoryImplementation(
                   networkInfo: NetworkInfoImpl(
                     connectionChecker: DataConnectionChecker(),
