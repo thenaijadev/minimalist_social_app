@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:minimalist_social_app/config/router/routes.dart';
 import 'package:minimalist_social_app/core/validator/validator.dart';
-import 'package:minimalist_social_app/core/widgets/dark_mode_switch.dart';
 import 'package:minimalist_social_app/core/widgets/loading_widget.dart';
 import 'package:minimalist_social_app/core/widgets/snackbar.dart';
 import 'package:minimalist_social_app/core/widgets/text_widget.dart';
 import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:minimalist_social_app/features/auth/presentation/widgets/biometrics_button.dart';
 import 'package:minimalist_social_app/features/auth/presentation/widgets/form_button.dart';
 import 'package:minimalist_social_app/features/auth/presentation/widgets/input_field_widget.dart';
 
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  const DarkModeSwitch(),
+                  const Gap(150),
                   Icon(Icons.person,
                       size: 80,
                       color: Theme.of(context).colorScheme.inversePrimary),
@@ -165,6 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
+                  BiometricsButton(
+                    onTap: () {},
+                  )
                 ],
               ),
             ),
