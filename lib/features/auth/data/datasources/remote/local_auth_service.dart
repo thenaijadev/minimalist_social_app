@@ -53,19 +53,26 @@ class LocalAuthServiceImplementation implements LocalAuthService {
   @override
   EitherBoolOrLocalAuthError authenticate() async {
     try {
-      final bool didAuthenticate = await auth.authenticate(
-          localizedReason: 'Please use biometrics to login',
-          authMessages: const <AuthMessages>[
-            // AndroidAuthMessages(
-            //   signInTitle: 'Oops! Biometric authentication required!',
-            //   cancelButton: 'No thanks',
-            // ),
-            // IOSAuthMessages(
-            //   cancelButton: 'No thanks',
-            // ),
-          ]);
+      final canAuthenticate = await canAuthenticateWithBiometrics();
+      final authenticate = canAuthenticate.fold(
+          (l) => LocalAuthError(message: l.message), (r) => r);
+      if (authenticate == true) {
+        final bool didAuthenticate = await auth.authenticate(
+            localizedReason: 'Please use biometrics to login',
+            authMessages: const <AuthMessages>[
+              // AndroidAuthMessages(
+              //   signInTitle: 'Oops! Biometric authentication required!',
+              //   cancelButton: 'No thanks',
+              // ),
+              // IOSAuthMessages(
+              //   cancelButton: 'No thanks',
+              // ),
+            ]);
+        return right(didAuthenticate);
+      }
 
-      return right(didAuthenticate);
+      return left(
+          LocalAuthError(message: "Could not authenticate with biometrics"));
     } on PlatformException catch (e) {
       return left(
           LocalAuthError(message: e.message ?? "There has been an error"));

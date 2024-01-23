@@ -48,4 +48,19 @@ class AuthUsecase implements UseCase<AuthUserEntity> {
     return authRepository.createUser(
         email: email, password: password, userName: userName);
   }
+
+  @override
+  EitherBoolOrLocalAuthError canAuthenticateWithBiometrics() async {
+    return localAuthRepository.canAuthenticateWithBiometrics();
+  }
+
+  @override
+  EitherListOfBiometricsOrLocalAuthError getBiometricsTypes() async {
+    return localAuthRepository.getBiometricsTypes();
+  }
+
+  @override
+  EitherBoolOrLocalAuthError authenticate() async {
+    return localAuthRepository.authenticate();
+  }
 }

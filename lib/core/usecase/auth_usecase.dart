@@ -15,4 +15,7 @@ abstract class UseCase<Type> {
   EitherFutureTrueOrAuthError logOut();
   EitherFutureTrueOrAuthError sendEmailVerification();
   EitherFutureTrueOrAuthError sendPasswordReset({required String toEmail});
+  EitherBoolOrLocalAuthError canAuthenticateWithBiometrics();
+  EitherListOfBiometricsOrLocalAuthError getBiometricsTypes();
+  EitherBoolOrLocalAuthError authenticate();
 }
