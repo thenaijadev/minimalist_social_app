@@ -21,8 +21,8 @@ class UserRepositoryImplementation implements UserRepository {
   @override
   EitherTrueOrUserError createUserDocument(
       {required String email, required String userName}) async {
-    final user = UserModel.fromMap({"email": email, "userName": userName});
-    await localUserDataSource.saveUser(user);
+    UserModel.fromMap({"email": email, "userName": userName});
+    // await localUserDataSource.saveUser(user);
     return userService.createUserDocument(email: email, userName: userName);
   }
 }
