@@ -45,3 +45,5 @@ class AuthEventSendPasswordReset extends AuthEvent {
 class AuthEventGetCurrentUser extends AuthEvent {
   const AuthEventGetCurrentUser();
 }
+
+class AuthEventAuthWithBiometrics extends AuthEvent {}

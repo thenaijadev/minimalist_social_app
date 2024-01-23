@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:minimalist_social_app/core/errors/auth_error.dart';
+import 'package:minimalist_social_app/core/errors/local_auth_error.dart';
 import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.dart';
 import 'package:minimalist_social_app/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:minimalist_social_app/features/auth/domain/usecases/auth_usecases.dart';
@@ -87,6 +88,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               AuthStateAuthError(authError: AuthError(message: l.message))),
           (r) {
         emit(const AuthStatePasswordResetSent());
+      });
+    });
+
+    on<AuthEventAuthWithBiometrics>((event, emit) async {
+      emit(const AuthStateIsLoading());
+      final bioAuth = await authUsecase.authenticate();
+      bioAuth.fold(
+          (l) => emit(AuthStateBiometricsError(
+              error: LocalAuthError(message: l.message))), (r) {
+        emit(const AuthStateIsLoggedIn(
+            user: AuthUserModel(
+                id: "id", email: "email", isEmailVerified: true)));
       });
     });
   }

@@ -51,3 +51,12 @@ class AuthStateEmailVerificationLinkSent extends AuthState {
 class AuthStatePasswordResetSent extends AuthState {
   const AuthStatePasswordResetSent();
 }
+
+class AuthStateBiometricsNotEnabled extends AuthState {}
+
+class AuthStateBiometricsError extends AuthState {
+  final LocalAuthError error;
+  const AuthStateBiometricsError({
+    required this.error,
+  });
+}

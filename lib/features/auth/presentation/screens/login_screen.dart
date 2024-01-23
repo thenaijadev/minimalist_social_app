@@ -124,6 +124,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         Navigator.popAndPushNamed(context, Routes.home);
                       }
+
+                      if (state is AuthStateBiometricsError) {
+                        InfoSnackBar.showErrorSnackBar(
+                            context, state.error.message);
+                      }
                     },
                     builder: (context, state) {
                       return state is AuthStateIsLoading
@@ -166,7 +171,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   BiometricsButton(
-                    onTap: () {},
+                    onTap: () {
+                      context
+                          .read<AuthBloc>()
+                          .add(AuthEventAuthWithBiometrics());
+                    },
                   )
                 ],
               ),
