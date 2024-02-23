@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'message_bloc.dart';
 
 abstract class MessageState extends Equatable {
@@ -7,4 +8,17 @@ abstract class MessageState extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeInitial extends MessageState {}
+class MessageStateInitial extends MessageState {}
+
+class MessageStateIsLoading extends MessageState {}
+
+class MessageStateError extends MessageState {
+  final MessageError error;
+  const MessageStateError({
+    required this.error,
+  });
+}
+
+class MessageStateMessagesSent extends MessageState {}
+
+class MessageStateMessageDeleted extends MessageState {}

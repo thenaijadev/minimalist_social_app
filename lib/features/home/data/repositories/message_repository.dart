@@ -9,4 +9,8 @@ class MessageRepository {
   EitherBoolOrChatError sendMessage(ChatMessage message) {
     return provider.sendMessage(message);
   }
+
+  Future<EitherBoolOrChatError> deleteMessage(String messageId) async {
+    return provider.deleteMessage(messageId);
+  }
 }

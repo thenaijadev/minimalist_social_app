@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,9 @@ import 'package:minimalist_social_app/features/auth/data/repositories/local_auth
 import 'package:minimalist_social_app/features/auth/domain/usecases/auth_usecases.dart';
 import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_mode_bloc.dart';
+import 'package:minimalist_social_app/features/home/data/provider/message_provider.dart';
+import 'package:minimalist_social_app/features/home/data/repositories/message_repository.dart';
+import 'package:minimalist_social_app/features/home/presentation/bloc/message_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -71,6 +75,13 @@ class MyApp extends StatelessWidget {
                     sharedPreferences: SharedPreferences.getInstance(),
                   ),
                 ),
+              ),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => MessageBloc(
+              repo: MessageRepository(
+                provider: MessageProvider(db: FirebaseFirestore.instance),
               ),
             ),
           ),

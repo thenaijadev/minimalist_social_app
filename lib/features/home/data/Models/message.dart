@@ -13,7 +13,7 @@ class ChatMessage {
     this.id,
     required this.sender,
     required this.message,
-    required this.time,
+    this.time,
   }) {
     id = const Uuid().v4(); // Generate a random UUID for the message ID
     time ??= DateTime.now(); // If time is not provided, set it to current time
