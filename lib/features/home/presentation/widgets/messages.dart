@@ -60,7 +60,7 @@ class _MessagesState extends State<Messages> {
                               document[index].data()! as Map<String, dynamic>;
 
                           return MessageBubble(
-                              id: "",
+                              id: data["id"],
                               sender: data['sender'] == state.user.email
                                   ? ""
                                   : data['sender'],
