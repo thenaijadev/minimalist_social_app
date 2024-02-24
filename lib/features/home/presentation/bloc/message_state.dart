@@ -22,3 +22,5 @@ class MessageStateError extends MessageState {
 class MessageStateMessagesSent extends MessageState {}
 
 class MessageStateMessageDeleted extends MessageState {}
+
+class MessageStateMessageUpdated extends MessageState {}

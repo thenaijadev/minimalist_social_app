@@ -13,4 +13,8 @@ class MessageRepository {
   Future<EitherBoolOrChatError> deleteMessage(String messageId) async {
     return provider.deleteMessage(messageId);
   }
+
+  Future<EitherBoolOrChatError> updateData(String messageId) async {
+    return provider.updateData(messageId);
+  }
 }

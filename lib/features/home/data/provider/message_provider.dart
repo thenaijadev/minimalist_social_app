@@ -24,4 +24,14 @@ class MessageProvider {
       return left(MessageError(message: e.toString()));
     }
   }
+
+  Future<EitherBoolOrChatError> updateData(String messageId) async {
+    try {
+      final washingtonRef = db.collection("cites").doc("DC");
+      await washingtonRef.update({"capital": true});
+      return right(true);
+    } catch (e) {
+      return left(MessageError(message: e.toString()));
+    }
+  }
 }

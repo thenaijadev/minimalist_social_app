@@ -19,7 +19,8 @@ class MessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-        showAlertDialog(context, message, id);
+        showAlertDialog(context: context, message: message, id: id, isMe: isMe);
+        if (isMe) {}
       },
       child: FadeInUp(
         child: Container(

@@ -19,3 +19,8 @@ class MessageEventDeleteMessage extends MessageEvent {
   final String messageId;
   const MessageEventDeleteMessage({required this.messageId});
 }
+
+class MessageEventUpdateMessage extends MessageEvent {
+  final String messageId;
+  const MessageEventUpdateMessage({required this.messageId});
+}

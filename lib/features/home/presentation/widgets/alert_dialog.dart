@@ -3,14 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minimalist_social_app/features/home/presentation/bloc/message_bloc.dart';
 import 'package:minimalist_social_app/features/home/presentation/widgets/alert_button.dart';
 
-showAlertDialog(BuildContext context, String message, String id) {
+showAlertDialog(
+    {required BuildContext context,
+    required String message,
+    required String id,
+    required bool isMe}) {
   // set up the button
-  Widget okButton = TextButton(
-    child: const Text("OK"),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
-  );
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(

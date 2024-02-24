@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         backgroundColor: Theme.of(context).colorScheme.background,
         title: TextWidget(
-          text: "The Wall",
+          text: "Chat",
           fontWeight: FontWeight.bold,
           color: Theme.of(context).colorScheme.inversePrimary,
         ),
