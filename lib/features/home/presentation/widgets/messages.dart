@@ -5,7 +5,10 @@ import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.
 import 'package:minimalist_social_app/features/home/presentation/widgets/message_bubble.dart';
 
 class Messages extends StatefulWidget {
-  const Messages({super.key, required this.controller});
+  const Messages({
+    super.key,
+    required this.controller,
+  });
   final ScrollController controller;
   @override
   State<Messages> createState() => _MessagesState();
@@ -16,7 +19,6 @@ class _MessagesState extends State<Messages> {
       .collection('messages')
       .orderBy("time", descending: false)
       .snapshots();
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(

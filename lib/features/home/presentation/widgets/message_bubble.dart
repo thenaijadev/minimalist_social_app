@@ -1,38 +1,60 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:minimalist_social_app/core/utils/logger.dart';
 import 'package:minimalist_social_app/core/widgets/text_widget.dart';
 import 'package:minimalist_social_app/features/home/presentation/widgets/alert_dialog.dart';
 
-class MessageBubble extends StatelessWidget {
+class MessageBubble extends StatefulWidget {
   final bool isMe;
   final String message;
   final String sender;
   final String id;
-  const MessageBubble(
-      {super.key,
-      required this.isMe,
-      required this.message,
-      required this.sender,
-      required this.id});
+  const MessageBubble({
+    super.key,
+    required this.isMe,
+    required this.message,
+    required this.sender,
+    required this.id,
+  });
+
+  @override
+  State<MessageBubble> createState() => _MessageBubbleState();
+}
+
+class _MessageBubbleState extends State<MessageBubble> {
+  final GlobalKey<FormFieldState> fieldKey = GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-        showAlertDialog(context: context, message: message, id: id, isMe: isMe);
-        if (isMe) {}
+        if (widget.isMe) {
+          showAlertDialog(
+              context: context,
+              message: widget.message,
+              id: widget.id,
+              isMe: widget.isMe,
+              edit: () {
+                Navigator.of(context).pop();
+                logger.e(widget.id);
+                showEditAlertDialog(
+                    context: context, message: widget.message, id: widget.id);
+              });
+        }
       },
       child: FadeInUp(
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(8),
           margin: EdgeInsets.only(
-              right: isMe ? 0 : 90, left: !isMe ? 0 : 90, bottom: 20),
+              right: widget.isMe ? 0 : 90,
+              left: !widget.isMe ? 0 : 90,
+              bottom: 20),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(10).copyWith(
-              bottomLeft: Radius.circular(!isMe ? 0 : 10),
-              bottomRight: Radius.circular(isMe ? 0 : 10),
+              bottomLeft: Radius.circular(!widget.isMe ? 0 : 10),
+              bottomRight: Radius.circular(widget.isMe ? 0 : 10),
             ),
           ),
           child: Column(
@@ -43,7 +65,7 @@ class MessageBubble extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextWidget(
-                    text: sender == "" ? "You" : sender,
+                    text: widget.sender == "" ? "You" : widget.sender,
                     textAlign: TextAlign.start,
                     fontSize: 12,
                     color: Theme.of(context).colorScheme.primary,
@@ -59,7 +81,7 @@ class MessageBubble extends StatelessWidget {
                 ],
               ),
               TextWidget(
-                text: message,
+                text: widget.message,
                 textAlign: TextAlign.start,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),

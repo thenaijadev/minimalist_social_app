@@ -38,7 +38,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
           messageId: messageId, updatedMessage: updatedMessage);
 
       res.fold((l) => emit(MessageStateError(error: l)),
-          (r) => emit(MessageStateMessageDeleted()));
+          (r) => emit(MessageStateMessageUpdated()));
     });
   }
 }
