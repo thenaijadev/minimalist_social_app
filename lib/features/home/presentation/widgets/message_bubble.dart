@@ -53,7 +53,9 @@ class _MessageBubbleState extends State<MessageBubble> {
               left: !widget.isMe ? 0 : 90,
               bottom: 20),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
+            color: widget.isMe
+                ? Theme.of(context).colorScheme.secondary
+                : Theme.of(context).colorScheme.inversePrimary,
             borderRadius: BorderRadius.circular(10).copyWith(
               bottomLeft: Radius.circular(!widget.isMe ? 0 : 10),
               bottomRight: Radius.circular(widget.isMe ? 0 : 10),
@@ -83,10 +85,11 @@ class _MessageBubbleState extends State<MessageBubble> {
                 ],
               ),
               TextWidget(
-                text: widget.message,
-                textAlign: TextAlign.start,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
+                  text: widget.message,
+                  textAlign: TextAlign.start,
+                  color: widget.isMe
+                      ? Theme.of(context).colorScheme.inversePrimary
+                      : Theme.of(context).colorScheme.inversePrimary),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
