@@ -7,7 +7,7 @@ class ChatMessage {
   String? id;
   String sender;
   String message;
-  DateTime? time;
+  String? time;
 
   ChatMessage({
     this.id,
@@ -16,14 +16,15 @@ class ChatMessage {
     this.time,
   }) {
     id = const Uuid().v4(); // Generate a random UUID for the message ID
-    time ??= DateTime.now(); // If time is not provided, set it to current time
+    time ??=
+        '${DateTime.now().day.toString()}/${DateTime.now().month.toString()}/${DateTime.now().year.toString()} at ${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}'; // If time is not provided, set it to current time
   }
 
   ChatMessage copyWith({
     String? id,
     String? sender,
     String? message,
-    DateTime? time,
+    String? time,
   }) {
     return ChatMessage(
       id: id ?? this.id,
@@ -38,17 +39,16 @@ class ChatMessage {
       'id': id,
       'sender': sender,
       'message': message,
-      'time': time?.toIso8601String(),
+      'time': time,
     };
   }
 
   factory ChatMessage.fromMap(Map<String, dynamic> map) {
     return ChatMessage(
-      id: map['id'] != null ? map['id'] as String : null,
-      sender: map['sender'] as String,
-      message: map['message'] as String,
-      time: DateTime.fromMillisecondsSinceEpoch(map['time'] as int),
-    );
+        id: map['id'] != null ? map['id'] as String : null,
+        sender: map['sender'] as String,
+        message: map['message'] as String,
+        time: map['time'] as String);
   }
 
   String toJson() => json.encode(toMap());

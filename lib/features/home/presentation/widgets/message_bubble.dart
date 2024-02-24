@@ -9,12 +9,14 @@ class MessageBubble extends StatefulWidget {
   final String message;
   final String sender;
   final String id;
+  final String time;
   const MessageBubble({
     super.key,
     required this.isMe,
     required this.message,
     required this.sender,
     required this.id,
+    required this.time,
   });
 
   @override
@@ -84,6 +86,17 @@ class _MessageBubbleState extends State<MessageBubble> {
                 text: widget.message,
                 textAlign: TextAlign.start,
                 color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextWidget(
+                    text: widget.time,
+                    textAlign: TextAlign.start,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                    fontSize: 10,
+                  ),
+                ],
               ),
             ],
           ),
