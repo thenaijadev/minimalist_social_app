@@ -11,19 +11,23 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
   final MessageRepository repo;
   MessageBloc({required this.repo}) : super(MessageStateInitial()) {
     on<MessageEventSendMessage>((event, emit) {
+      emit(MessageStateIsLoading());
       final message = event.chat;
       final res = repo.sendMessage(message);
 
       res.fold((l) => emit(MessageStateError(error: l)),
-          (r) => MessageStateMessagesSent());
+          (r) => emit(MessageStateMessagesSent()));
+
+      emit(MessageStateInitial());
     });
 
     on<MessageEventDeleteMessage>((event, emit) async {
+      emit(MessageStateIsLoading());
       final String messageId = event.messageId;
       final res = await repo.deleteMessage(messageId);
 
       res.fold((l) => emit(MessageStateError(error: l)),
-          (r) => MessageStateMessageDeleted());
+          (r) => emit(MessageStateMessageDeleted()));
     });
   }
 }

@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:minimalist_social_app/features/home/presentation/widgets/message_bubble.dart';
 
 class Messages extends StatefulWidget {
-  const Messages({
-    super.key,
-  });
-
+  const Messages({super.key, required this.controller});
+  final ScrollController controller;
   @override
   State<Messages> createState() => _MessagesState();
 }
@@ -19,18 +16,6 @@ class _MessagesState extends State<Messages> {
       .collection('messages')
       .orderBy("time", descending: false)
       .snapshots();
-  late ScrollController controller;
-  @override
-  void initState() {
-    super.initState();
-    controller = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    controller.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +29,13 @@ class _MessagesState extends State<Messages> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text("Loading");
         }
+
+        Future.delayed(Durations.medium1, () {
+          widget.controller.animateTo(
+              curve: Curves.decelerate,
+              duration: const Duration(milliseconds: 200),
+              widget.controller.position.maxScrollExtent + 1000);
+        });
         return BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             return state is AuthStateIsLoggedIn
@@ -52,7 +44,7 @@ class _MessagesState extends State<Messages> {
                       padding: const EdgeInsets.only(
                           right: 20, left: 20.0, top: 10, bottom: 0),
                       child: ListView.builder(
-                        controller: controller,
+                        controller: widget.controller,
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           final document = snapshot.data!.docs;
