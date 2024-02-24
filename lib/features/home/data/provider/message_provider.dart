@@ -25,10 +25,11 @@ class MessageProvider {
     }
   }
 
-  Future<EitherBoolOrChatError> updateData(String messageId) async {
+  Future<EitherBoolOrChatError> updateData(
+      {required String messageId, required String updatedMessage}) async {
     try {
-      final washingtonRef = db.collection("cites").doc("DC");
-      await washingtonRef.update({"capital": true});
+      final messageRef = db.collection("messages").doc(messageId);
+      await messageRef.update({"message": updatedMessage});
       return right(true);
     } catch (e) {
       return left(MessageError(message: e.toString()));

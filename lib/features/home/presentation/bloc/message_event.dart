@@ -22,5 +22,7 @@ class MessageEventDeleteMessage extends MessageEvent {
 
 class MessageEventUpdateMessage extends MessageEvent {
   final String messageId;
-  const MessageEventUpdateMessage({required this.messageId});
+  final String updatedMessage;
+  const MessageEventUpdateMessage(
+      {required this.messageId, required this.updatedMessage});
 }

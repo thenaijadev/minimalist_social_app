@@ -29,5 +29,16 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
       res.fold((l) => emit(MessageStateError(error: l)),
           (r) => emit(MessageStateMessageDeleted()));
     });
+
+    on<MessageEventUpdateMessage>((event, emit) async {
+      emit(MessageStateIsLoading());
+      final String messageId = event.messageId;
+      final String updatedMessage = event.updatedMessage;
+      final res = await repo.updateData(
+          messageId: messageId, updatedMessage: updatedMessage);
+
+      res.fold((l) => emit(MessageStateError(error: l)),
+          (r) => emit(MessageStateMessageDeleted()));
+    });
   }
 }

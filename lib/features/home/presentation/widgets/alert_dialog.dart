@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:minimalist_social_app/core/widgets/text_widget.dart';
 import 'package:minimalist_social_app/features/home/presentation/bloc/message_bloc.dart';
 import 'package:minimalist_social_app/features/home/presentation/widgets/alert_button.dart';
 
@@ -12,15 +14,19 @@ showAlertDialog(
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: Text(message),
+    title: TextWidget(
+      text: message,
+      fontSize: 18,
+      color: Theme.of(context).colorScheme.inversePrimary,
+    ),
     content: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // AlertButton(
-        //   label: "Edit",
-        //   onPressed: () {},
-        // ),
-        // const Gap(10),
+        AlertButton(
+          label: "Edit",
+          onPressed: () {},
+        ),
+        const Gap(10),
         AlertButton(
           label: "Delete",
           onPressed: () {
