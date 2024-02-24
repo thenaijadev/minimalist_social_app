@@ -1,9 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:minimalist_social_app/core/widgets/text_widget.dart';
-import 'package:minimalist_social_app/features/home/presentation/bloc/message_bloc.dart';
+import 'package:minimalist_social_app/features/home/presentation/widgets/alert_dialog.dart';
 
 class MessageBubble extends StatelessWidget {
   final bool isMe;
@@ -16,18 +14,17 @@ class MessageBubble extends StatelessWidget {
       required this.message,
       required this.sender,
       required this.id});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-        context
-            .read<MessageBloc>()
-            .add(MessageEventDeleteMessage(messageId: id));
+        showAlertDialog(context, message, id);
       },
       child: FadeInUp(
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(8),
           margin: EdgeInsets.only(
               right: isMe ? 0 : 90, left: !isMe ? 0 : 90, bottom: 20),
           decoration: BoxDecoration(
@@ -42,6 +39,7 @@ class MessageBubble extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextWidget(
                     text: sender == "" ? "You" : sender,
@@ -50,9 +48,15 @@ class MessageBubble extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
+                  // IconButton(
+                  //   onPressed: () {
+                  //     showAlertDialog(context);
+                  //   },
+                  //   icon: const Icon(CupertinoIcons.ellipsis_vertical),
+                  //   iconSize: 15,
+                  // )
                 ],
               ),
-              const Gap(10),
               TextWidget(
                 text: message,
                 textAlign: TextAlign.start,
