@@ -17,7 +17,7 @@ class Messages extends StatefulWidget {
 class _MessagesState extends State<Messages> {
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('messages')
-      .orderBy("time", descending: false)
+      .orderBy("arrangementTime", descending: false)
       .snapshots();
   @override
   Widget build(BuildContext context) {
