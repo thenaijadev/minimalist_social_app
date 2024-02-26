@@ -89,14 +89,16 @@ class _MessageBubbleState extends State<MessageBubble> {
                   textAlign: TextAlign.start,
                   color: widget.isMe
                       ? Theme.of(context).colorScheme.inversePrimary
-                      : Theme.of(context).colorScheme.inversePrimary),
+                      : Theme.of(context).colorScheme.primary),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextWidget(
                     text: widget.time,
                     textAlign: TextAlign.start,
-                    color: Theme.of(context).colorScheme.inversePrimary,
+                    color: widget.isMe
+                        ? Theme.of(context).colorScheme.inversePrimary
+                        : Theme.of(context).colorScheme.primary,
                     fontSize: 10,
                   ),
                 ],
