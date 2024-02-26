@@ -9,7 +9,6 @@ import 'package:minimalist_social_app/features/auth/presentation/screens/login_s
 import 'package:minimalist_social_app/features/auth/presentation/screens/registration_screen.dart';
 import 'package:minimalist_social_app/features/home/presentation/pages/home_screen.dart';
 import 'package:minimalist_social_app/features/profile/presentation/pages/profile_screen.dart';
-import 'package:minimalist_social_app/features/users/presentation/pages/users_screen.dart';
 
 class AppRouter {
   Route onGenerateRoute(RouteSettings routeSettings) {
@@ -45,10 +44,6 @@ class AppRouter {
           builder: (_) => const HomeScreen(),
         );
 
-      case Routes.users:
-        return MaterialPageRoute(
-          builder: (_) => const UsersScreen(),
-        );
       case Routes.profile:
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),
