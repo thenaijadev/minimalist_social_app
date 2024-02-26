@@ -1,38 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:minimalist_social_app/core/errors/message_error.dart';
+import 'package:minimalist_social_app/core/errors/user_error.dart';
 import 'package:minimalist_social_app/core/utils/typedef.dart';
-import 'package:minimalist_social_app/features/home/data/Models/message.dart';
+import 'package:minimalist_social_app/features/users/data/users/user_model.dart';
 
 class UsersProvider {
   UsersProvider({required this.db});
   final FirebaseFirestore db;
-  EitherBoolOrChatError createUser(ChatMessage message) {
+  EitherBoolOrUserError createUser(UserModel user) {
     try {
-      db.collection("messages").doc(message.id).set(message.toMap());
+      db.collection("users").doc(user.id).set(user.toMap());
       return right(true);
     } catch (e) {
-      return left(MessageError(message: e.toString()));
+      return left(UserError(message: e.toString()));
     }
   }
 
-  Future<EitherBoolOrChatError> deleteUser(String messageId) async {
+  Future<EitherBoolOrUserError> deleteUser(String userId) async {
     try {
-      await db.collection("messages").doc(messageId).delete();
+      await db.collection("users").doc(userId).delete();
       return right(true);
     } catch (e) {
-      return left(MessageError(message: e.toString()));
+      return left(UserError(message: e.toString()));
     }
   }
 
-  Future<EitherBoolOrChatError> updateUser(
-      {required String messageId, required String updatedMessage}) async {
+  Future<EitherBoolOrUserError> updateUser(
+      {required Map<String, dynamic> userDetails}) async {
     try {
-      final messageRef = db.collection("messages").doc(messageId);
-      await messageRef.update({"message": updatedMessage});
+      final messageRef = db.collection("users").doc(userDetails["id"]);
+      await messageRef.update(userDetails);
       return right(true);
     } catch (e) {
-      return left(MessageError(message: e.toString()));
+      return left(UserError(message: e.toString()));
     }
   }
 }
