@@ -4,7 +4,7 @@ import 'package:minimalist_social_app/core/widgets/text_widget.dart';
 class InputFieldWidget extends StatelessWidget {
   const InputFieldWidget(
       {super.key,
-      required this.label,
+      this.label = "",
       required this.hintColor,
       this.initialValue,
       required this.hintText,

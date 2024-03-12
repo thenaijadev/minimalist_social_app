@@ -21,9 +21,9 @@ import 'package:minimalist_social_app/features/auth/data/repositories/local_auth
 import 'package:minimalist_social_app/features/auth/domain/usecases/auth_usecases.dart';
 import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_mode_bloc.dart';
-import 'package:minimalist_social_app/features/home/data/provider/message_provider.dart';
-import 'package:minimalist_social_app/features/home/data/repositories/message_repository.dart';
-import 'package:minimalist_social_app/features/home/presentation/bloc/message_bloc.dart';
+import 'package:minimalist_social_app/features/chat/data/provider/message_provider.dart';
+import 'package:minimalist_social_app/features/chat/data/repositories/message_repository.dart';
+import 'package:minimalist_social_app/features/chat/presentation/bloc/message_bloc.dart';
 import 'package:minimalist_social_app/features/users/bloc/user_bloc.dart';
 import 'package:minimalist_social_app/features/users/data/providers/user_provider.dart';
 import 'package:minimalist_social_app/features/users/data/repositories/user_repository.dart';

@@ -1,6 +1,6 @@
 import 'package:minimalist_social_app/core/utils/typedef.dart';
-import 'package:minimalist_social_app/features/home/data/Models/message.dart';
-import 'package:minimalist_social_app/features/home/data/provider/message_provider.dart';
+import 'package:minimalist_social_app/features/chat/data/models/message.dart';
+import 'package:minimalist_social_app/features/chat/data/provider/message_provider.dart';
 
 class MessageRepository {
   MessageRepository({required this.provider});

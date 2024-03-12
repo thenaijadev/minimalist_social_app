@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minimalist_social_app/features/home/presentation/widgets/bottom_nav_bar.dart';
+import 'package:minimalist_social_app/features/home/presentation/widgets/home_screen_widget.dart';
 import 'package:minimalist_social_app/features/home/presentation/widgets/my_drawer.dart';
 
 import '../widgets/app_bar.dart';
@@ -13,8 +14,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
   final List<Widget> _pages = [
-    const Center(child: Text('Home Page')),
+    const HomeScreenWidget(),
     const Center(child: Text('Settings Page')),
     const Center(child: Text('Profile Page')),
   ];
