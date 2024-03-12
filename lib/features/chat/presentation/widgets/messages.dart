@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:minimalist_social_app/features/home/presentation/widgets/message_bubble.dart';
+import 'package:minimalist_social_app/features/chat/presentation/widgets/message_bubble.dart';
 
 class Messages extends StatefulWidget {
   const Messages({

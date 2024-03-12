@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:minimalist_social_app/core/widgets/dark_mode_switch.dart';
 import 'package:minimalist_social_app/core/widgets/text_widget.dart';
-import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:minimalist_social_app/features/home/data/Models/message.dart';
-import 'package:minimalist_social_app/features/home/presentation/bloc/message_bloc.dart';
-import 'package:minimalist_social_app/features/home/presentation/widgets/message_field.dart';
-import 'package:minimalist_social_app/features/home/presentation/widgets/messages.dart';
-import 'package:minimalist_social_app/features/home/presentation/widgets/my_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,94 +9,98 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final messageFieldKey = GlobalKey<FormFieldState>();
-  late ScrollController controller;
-  @override
-  void initState() {
-    super.initState();
-    controller = ScrollController();
-  }
+  int _selectedIndex = 0;
+  final List<Widget> _pages = [
+    const Center(child: Text('Home Page')),
+    const Center(child: Text('Settings Page')),
+    const Center(child: Text('Profile Page')),
+  ];
 
-  @override
-  void dispose() {
-    super.dispose();
-    controller.dispose();
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        centerTitle: true,
-        actions: const [
-          DarkModeSwitch(),
-        ],
-        backgroundColor: Theme.of(context).colorScheme.background,
-        title: TextWidget(
-          text: "Chat",
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).colorScheme.inversePrimary,
-        ),
-      ),
-      drawer: const MyDrawer(),
-      body: Stack(
-        alignment: Alignment.bottomRight,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Messages(
-                controller: controller,
-              ),
-              BlocBuilder<AuthBloc, AuthState>(
-                builder: (context, state) {
-                  return state is AuthStateIsLoggedIn
-                      ? MessageField(
-                          fieldKey: messageFieldKey,
-                          send: () {
-                            if (messageFieldKey.currentState?.value
-                                    .toString()
-                                    .trim() ==
-                                "") {
-                              return;
-                            }
-                            context.read<MessageBloc>().add(
-                                  MessageEventSendMessage(
-                                    chat: ChatMessage(
-                                      sender: state.user.email,
-                                      message:
-                                          messageFieldKey.currentState?.value,
-                                    ),
-                                  ),
-                                );
-
-                            messageFieldKey.currentState?.reset();
-                          },
-                          onChanged: (value) {},
-                        )
-                      : const SizedBox();
-                },
-              )
-            ],
-          ),
-          Positioned(
-            bottom: 85,
-            right: 20,
-            child: GestureDetector(
-              onTap: () {
-                controller.animateTo(
-                    curve: Curves.decelerate,
-                    duration: const Duration(milliseconds: 200),
-                    controller.position.maxScrollExtent + 100);
-              },
-              child: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                radius: 12,
-                child: const Icon(Icons.arrow_downward_rounded),
+      body: _pages[_selectedIndex],
+      backgroundColor: theme.background,
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: theme.inversePrimary,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+            label: "",
+            icon: AnimatedContainer(
+              padding:
+                  EdgeInsets.symmetric(vertical: _selectedIndex == 0 ? 3 : 0),
+              width: _selectedIndex == 0 ? 100 : 0,
+              duration: const Duration(milliseconds: 300),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: _selectedIndex == 0
+                      ? theme.secondary
+                      : Colors.transparent),
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.home_rounded,
+                    color: theme.inversePrimary,
+                  ),
+                  const TextWidget(text: "Home")
+                ],
               ),
             ),
-          )
+          ),
+          BottomNavigationBarItem(
+            label: "",
+            icon: AnimatedContainer(
+              padding:
+                  EdgeInsets.symmetric(vertical: _selectedIndex == 1 ? 3 : 0),
+              width: _selectedIndex == 1 ? 100 : 0,
+              duration: const Duration(milliseconds: 300),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: _selectedIndex == 1
+                      ? theme.secondary
+                      : Colors.transparent),
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.home_rounded,
+                    color: theme.inversePrimary,
+                  ),
+                  const TextWidget(text: "Home")
+                ],
+              ),
+            ),
+          ),
+          BottomNavigationBarItem(
+            label: "",
+            icon: AnimatedContainer(
+              padding:
+                  EdgeInsets.symmetric(vertical: _selectedIndex == 2 ? 3 : 0),
+              width: _selectedIndex == 2 ? 100 : 0,
+              duration: const Duration(milliseconds: 300),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: _selectedIndex == 2
+                      ? theme.secondary
+                      : Colors.transparent),
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.settings,
+                    color: theme.inversePrimary,
+                  ),
+                  const TextWidget(text: "Settings")
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

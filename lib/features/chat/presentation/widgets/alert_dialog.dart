@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:minimalist_social_app/core/widgets/text_widget.dart';
 import 'package:minimalist_social_app/features/home/presentation/bloc/message_bloc.dart';
-import 'package:minimalist_social_app/features/home/presentation/widgets/alert_button.dart';
-import 'package:minimalist_social_app/features/home/presentation/widgets/message_field.dart';
+import 'package:minimalist_social_app/features/chat/presentation/widgets/alert_button.dart';
+import 'package:minimalist_social_app/features/chat/presentation/widgets/message_field.dart';
 
 showAlertDialog(
     {required BuildContext context,

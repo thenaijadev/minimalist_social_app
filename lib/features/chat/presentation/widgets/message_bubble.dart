@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:minimalist_social_app/core/utils/logger.dart';
 import 'package:minimalist_social_app/core/widgets/text_widget.dart';
-import 'package:minimalist_social_app/features/home/presentation/widgets/alert_dialog.dart';
+import 'package:minimalist_social_app/features/chat/presentation/widgets/alert_dialog.dart';
 
 class MessageBubble extends StatefulWidget {
   final bool isMe;

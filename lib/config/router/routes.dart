@@ -7,6 +7,7 @@ class Routes {
   static const String emailVerification = '/emailVerification';
   static const String home = '/home';
   static const String users = '/users';
+  static const String chats = '/chats';
 
   static const String profile = '/profile';
 }

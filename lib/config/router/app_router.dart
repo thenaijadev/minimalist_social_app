@@ -7,6 +7,7 @@ import 'package:minimalist_social_app/features/auth/presentation/screens/forgot_
 import 'package:minimalist_social_app/features/auth/presentation/screens/landing_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:minimalist_social_app/features/auth/presentation/screens/registration_screen.dart';
+import 'package:minimalist_social_app/features/chat/presentation/screens/chat_screen.dart';
 import 'package:minimalist_social_app/features/home/presentation/pages/home_screen.dart';
 import 'package:minimalist_social_app/features/profile/presentation/pages/profile_screen.dart';
 
@@ -39,11 +40,14 @@ class AppRouter {
           builder: (_) => const EmailVerificationScreen(),
         );
 
+      case Routes.chats:
+        return MaterialPageRoute(
+          builder: (_) => const ChatScreen(),
+        );
       case Routes.home:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
         );
-
       case Routes.profile:
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),

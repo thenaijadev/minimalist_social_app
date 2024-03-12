@@ -24,6 +24,9 @@ import 'package:minimalist_social_app/features/dark_mode/presentation/bloc/dark_
 import 'package:minimalist_social_app/features/home/data/provider/message_provider.dart';
 import 'package:minimalist_social_app/features/home/data/repositories/message_repository.dart';
 import 'package:minimalist_social_app/features/home/presentation/bloc/message_bloc.dart';
+import 'package:minimalist_social_app/features/users/bloc/user_bloc.dart';
+import 'package:minimalist_social_app/features/users/data/providers/user_provider.dart';
+import 'package:minimalist_social_app/features/users/data/repositories/user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -59,6 +62,13 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => DarkModeBloc(),
+          ),
+          BlocProvider(
+            create: (context) => UserBloc(
+              userRepository: UserRepository(
+                provider: UsersProvider(db: FirebaseFirestore.instance),
+              ),
+            ),
           ),
           BlocProvider(
             create: (context) => AuthBloc(
