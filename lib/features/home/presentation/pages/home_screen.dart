@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:minimalist_social_app/core/widgets/text_widget.dart';
+import 'package:minimalist_social_app/features/home/presentation/widgets/bottom_nav_bar.dart';
+import 'package:minimalist_social_app/features/home/presentation/widgets/my_drawer.dart';
+
+import '../widgets/app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,83 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return Scaffold(
-      body: _pages[_selectedIndex],
-      backgroundColor: theme.background,
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: theme.inversePrimary,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-            label: "",
-            icon: AnimatedContainer(
-              padding:
-                  EdgeInsets.symmetric(vertical: _selectedIndex == 0 ? 3 : 0),
-              width: _selectedIndex == 0 ? 100 : 0,
-              duration: const Duration(milliseconds: 300),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: _selectedIndex == 0
-                      ? theme.secondary
-                      : Colors.transparent),
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.home_rounded,
-                    color: theme.inversePrimary,
-                  ),
-                  const TextWidget(text: "Home")
-                ],
-              ),
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: "",
-            icon: AnimatedContainer(
-              padding:
-                  EdgeInsets.symmetric(vertical: _selectedIndex == 1 ? 3 : 0),
-              width: _selectedIndex == 1 ? 100 : 0,
-              duration: const Duration(milliseconds: 300),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: _selectedIndex == 1
-                      ? theme.secondary
-                      : Colors.transparent),
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.home_rounded,
-                    color: theme.inversePrimary,
-                  ),
-                  const TextWidget(text: "Home")
-                ],
-              ),
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: "",
-            icon: AnimatedContainer(
-              padding:
-                  EdgeInsets.symmetric(vertical: _selectedIndex == 2 ? 3 : 0),
-              width: _selectedIndex == 2 ? 100 : 0,
-              duration: const Duration(milliseconds: 300),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: _selectedIndex == 2
-                      ? theme.secondary
-                      : Colors.transparent),
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.settings,
-                    color: theme.inversePrimary,
-                  ),
-                  const TextWidget(text: "Settings")
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+        appBar: appBar(theme: theme, title: "Chats"),
+        drawer: const MyDrawer(),
+        body: _pages[_selectedIndex],
+        backgroundColor: theme.background,
+        bottomNavigationBar: bottomNavigationBar(
+            onTap: _onItemTapped, theme: theme, selectedIndex: _selectedIndex));
   }
 }
