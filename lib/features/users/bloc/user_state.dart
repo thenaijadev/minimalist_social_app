@@ -13,9 +13,9 @@ class UserInitial extends UserState {}
 class UserStateIsLoading extends UserState {}
 
 class UserStateError extends UserState {
-  final UserError error;
+  final UserError userError;
   const UserStateError({
-    required this.error,
+    required this.userError,
   });
 }
 

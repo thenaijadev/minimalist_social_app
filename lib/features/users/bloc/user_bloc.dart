@@ -17,7 +17,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       final bool isEmailVerified = event.isVerified;
       final res = userRepository.createUser(UserModel(
           email: email, userName: userName, isVerified: isEmailVerified));
-      res.fold((l) => emit(UserStateError(error: l)), (r) {
+      res.fold((l) => emit(UserStateError(userError: l)), (r) {
         final user = UserModel(
             email: email, userName: userName, isVerified: isEmailVerified);
 

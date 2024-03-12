@@ -150,44 +150,53 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     hintColor: Theme.of(context).colorScheme.secondary,
                   ),
                   const Gap(25),
-                  BlocConsumer<AuthBloc, AuthState>(
+                  BlocListener<UserBloc, UserState>(
                     listener: (context, state) {
-                      if (state is AuthStateAuthError) {
+                      if (state is UserStateError) {
                         InfoSnackBar.showErrorSnackBar(
-                            context, state.authError.message);
+                            context, state.userError.message);
                       }
-                      if (state is AuthStateUserCreated) {
-                        context.read<UserBloc>().add(
-                              UserEventCreateUser(
-                                  userName: usernameKey.currentState!.value,
-                                  email: state.user.email,
-                                  isVerified: state.user.isEmailVerified),
-                            );
-
+                      if (state is UserStateUserCreated) {
                         Navigator.pushNamed(context, Routes.emailVerification);
                       }
                     },
-                    builder: (context, state) {
-                      return state is AuthStateIsLoading
-                          ? const LoadingWidget()
-                          : FormButton(
-                              label: "Register",
-                              onTap: () {
-                                logger.e(emailState);
-                                logger.e(confirmPasswordState);
+                    child: BlocConsumer<AuthBloc, AuthState>(
+                      listener: (context, state) {
+                        if (state is AuthStateAuthError) {
+                          InfoSnackBar.showErrorSnackBar(
+                              context, state.authError.message);
+                        }
+                        if (state is AuthStateUserCreated) {
+                          context.read<UserBloc>().add(
+                                UserEventCreateUser(
+                                    userName: usernameKey.currentState!.value,
+                                    email: state.user.email,
+                                    isVerified: state.user.isEmailVerified),
+                              );
+                        }
+                      },
+                      builder: (context, state) {
+                        return state is AuthStateIsLoading
+                            ? const LoadingWidget()
+                            : FormButton(
+                                label: "Register",
+                                onTap: () {
+                                  logger.e(emailState);
+                                  logger.e(confirmPasswordState);
 
-                                if (emailState! && confirmPasswordState!) {
-                                  context.read<AuthBloc>().add(
-                                      AuthEventCreateUser(
-                                          email: emailKey.currentState?.value,
-                                          password:
-                                              passwordKey.currentState?.value,
-                                          userName:
-                                              usernameKey.currentState!.value));
-                                }
-                              },
-                            );
-                    },
+                                  if (emailState! && confirmPasswordState!) {
+                                    context.read<AuthBloc>().add(
+                                        AuthEventCreateUser(
+                                            email: emailKey.currentState?.value,
+                                            password:
+                                                passwordKey.currentState?.value,
+                                            userName: usernameKey
+                                                .currentState!.value));
+                                  }
+                                },
+                              );
+                      },
+                    ),
                   ),
                   const Gap(20),
                   Row(
