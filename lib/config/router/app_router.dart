@@ -41,8 +41,9 @@ class AppRouter {
         );
 
       case Routes.chats:
+        var reciever = routeSettings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (_) => const ChatScreen(),
+          builder: (_) => ChatScreen(reciever: reciever),
         );
       case Routes.home:
         return MaterialPageRoute(

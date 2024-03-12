@@ -42,7 +42,7 @@ class LocalAuthServiceImplementation implements LocalAuthService {
         // Specific types of biometrics are available.
         // Use checks like this with caution!
       }
-      logger.e(availableBiometrics);
+      (availableBiometrics);
 
       return right(availableBiometrics);
     } catch (e) {

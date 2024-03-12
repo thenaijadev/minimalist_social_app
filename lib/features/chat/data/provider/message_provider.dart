@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:minimalist_social_app/core/errors/message_error.dart';
 import 'package:minimalist_social_app/core/utils/typedef.dart';
-import 'package:minimalist_social_app/features/chat/data/models/message.dart';
+import 'package:minimalist_social_app/features/chat/data/models/chat_message.dart';
 
 class MessageProvider {
   MessageProvider({required this.db});

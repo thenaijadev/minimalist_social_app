@@ -38,7 +38,7 @@ class _MessageBubbleState extends State<MessageBubble> {
               isMe: widget.isMe,
               edit: () {
                 Navigator.of(context).pop();
-                logger.e(widget.id);
+                (widget.id);
                 showEditAlertDialog(
                     context: context, message: widget.message, id: widget.id);
               });

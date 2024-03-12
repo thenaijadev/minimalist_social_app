@@ -26,7 +26,7 @@ abstract class FirebaseAuthService {
 class FirebaseAuthServiceImlementation implements FirebaseAuthService {
   EitherAuthUserOrAuthError get currentUser {
     final user = FirebaseAuth.instance.currentUser;
-    logger.e(user.toString());
+    (user.toString());
     if (user != null) {
       return right(AuthUserModel.fromFirebase(
         user,

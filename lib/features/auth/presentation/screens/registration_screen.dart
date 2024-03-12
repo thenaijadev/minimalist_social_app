@@ -187,8 +187,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 : FormButton(
                                     label: "Register",
                                     onTap: () {
-                                      logger.e(emailState);
-                                      logger.e(confirmPasswordState);
+                                      (emailState);
+                                      (confirmPasswordState);
 
                                       if (emailState! &&
                                           confirmPasswordState!) {

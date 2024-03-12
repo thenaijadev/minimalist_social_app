@@ -1,21 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:uuid/uuid.dart';
-
 class ChatMessage {
-  String? id;
+  String id;
   String sender;
   String message;
   String? time;
   DateTime? arrangementTime;
+  String? senderId;
+  String? reciever;
   ChatMessage(
-      {this.id,
+      {required this.id,
       required this.sender,
       required this.message,
       this.time,
+      this.senderId,
+      this.reciever,
       this.arrangementTime}) {
-    id = const Uuid().v4(); // Generate a random UUID for the message ID
+    // id = const Uuid().v4(); // Generate a random UUID for the message ID
     time ??=
         '${DateTime.now().day.toString()}/${DateTime.now().month.toString()}/${DateTime.now().year.toString()} at ${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
     arrangementTime ??=
@@ -27,6 +29,8 @@ class ChatMessage {
     String? sender,
     String? message,
     String? time,
+    String? senderId,
+    String? recieverId,
     DateTime? arrangementTime,
   }) {
     return ChatMessage(
@@ -34,7 +38,9 @@ class ChatMessage {
       sender: sender ?? this.sender,
       message: message ?? this.message,
       time: time ?? this.time,
-      arrangementTime: arrangementTime ?? this.arrangementTime,
+      senderId: senderId ?? this.senderId,
+      reciever: recieverId ?? this.senderId,
+      arrangementTime: arrangementTime ?? arrangementTime,
     );
   }
 
@@ -42,6 +48,8 @@ class ChatMessage {
     return <String, dynamic>{
       'id': id,
       'sender': sender,
+      "senderId": senderId,
+      "recieverId": reciever,
       'message': message,
       'time': time,
       'arrangementTime': arrangementTime?.millisecondsSinceEpoch,
@@ -50,8 +58,10 @@ class ChatMessage {
 
   factory ChatMessage.fromMap(Map<String, dynamic> map) {
     return ChatMessage(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: map['id'] as String,
       sender: map['sender'] as String,
+      senderId: map["senderId"] as String,
+      reciever: map["recieverId"] as String,
       message: map['message'] as String,
       time: map['time'] != null ? map['time'] as String : null,
       arrangementTime: map['arrangementTime'] != null
@@ -67,7 +77,7 @@ class ChatMessage {
 
   @override
   String toString() {
-    return 'ChatMessage(id: $id, sender: $sender, message: $message, time: $time, arrangementTime: $arrangementTime)';
+    return 'ChatMessage(id: $id, sender: $sender, message: $message, senderId:$senderId, $message,recieverId:$reciever,time: $time, arrangementTime: $arrangementTime)';
   }
 
   @override
@@ -78,6 +88,8 @@ class ChatMessage {
         other.sender == sender &&
         other.message == message &&
         other.time == time &&
+        other.senderId == senderId &&
+        other.reciever == reciever &&
         other.arrangementTime == arrangementTime;
   }
 
