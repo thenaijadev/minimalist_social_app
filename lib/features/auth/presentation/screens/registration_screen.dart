@@ -10,6 +10,7 @@ import 'package:minimalist_social_app/core/widgets/text_widget.dart';
 import 'package:minimalist_social_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:minimalist_social_app/features/auth/presentation/widgets/form_button.dart';
 import 'package:minimalist_social_app/features/auth/presentation/widgets/input_field_widget.dart';
+import 'package:minimalist_social_app/features/users/bloc/user_bloc.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -156,6 +157,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             context, state.authError.message);
                       }
                       if (state is AuthStateUserCreated) {
+                        context.read<UserBloc>().add(
+                              UserEventCreateUser(
+                                  userName: usernameKey.currentState!.value,
+                                  email: state.user.email,
+                                  isVerified: state.user.isEmailVerified),
+                            );
+
                         Navigator.pushNamed(context, Routes.emailVerification);
                       }
                     },

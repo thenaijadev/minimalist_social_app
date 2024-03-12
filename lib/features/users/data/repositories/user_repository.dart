@@ -6,11 +6,11 @@ class UserRepository {
   UserRepository({required this.provider});
   final UsersProvider provider;
 
-  EitherBoolOrUserError sendMessage(UserModel message) {
+  EitherBoolOrUserError createUser(UserModel message) {
     return provider.createUser(message);
   }
 
-  Future<EitherBoolOrUserError> deleteMessage(String userId) async {
+  Future<EitherBoolOrUserError> deleteUser(String userId) async {
     return provider.deleteUser(userId);
   }
 
