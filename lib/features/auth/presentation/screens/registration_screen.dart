@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:minimalist_social_app/config/router/routes.dart';
-import 'package:minimalist_social_app/core/utils/logger.dart';
 import 'package:minimalist_social_app/core/validator/validator.dart';
 import 'package:minimalist_social_app/core/widgets/loading_widget.dart';
 import 'package:minimalist_social_app/core/widgets/snackbar.dart';
