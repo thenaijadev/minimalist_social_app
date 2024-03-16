@@ -6,7 +6,7 @@ class UserRepository {
   UserRepository({required this.provider});
   final UsersProvider provider;
 
-  EitherBoolOrUserError createUser(UserModel message) {
+  EitherUserModelOrUserError createUser(UserModel message) {
     return provider.createUser(message);
   }
 

@@ -7,10 +7,10 @@ import 'package:minimalist_social_app/features/users/data/users/user_model.dart'
 class UsersProvider {
   UsersProvider({required this.db});
   final FirebaseFirestore db;
-  EitherBoolOrUserError createUser(UserModel user) {
+  EitherUserModelOrUserError createUser(UserModel user) {
     try {
       db.collection("users").doc(user.id).set(user.toMap());
-      return right(true);
+      return right(user);
     } catch (e) {
       return left(UserError(message: e.toString()));
     }

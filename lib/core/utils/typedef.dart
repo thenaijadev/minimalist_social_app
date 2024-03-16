@@ -5,6 +5,7 @@ import 'package:minimalist_social_app/core/errors/local_auth_error.dart';
 import 'package:minimalist_social_app/core/errors/message_error.dart';
 import 'package:minimalist_social_app/core/errors/user_error.dart';
 import 'package:minimalist_social_app/features/auth/data/models/auth_user_model.dart';
+import 'package:minimalist_social_app/features/users/data/users/user_model.dart';
 
 //----------------------------------Auth-----------------------------
 typedef EitherAuthUserOrAuthError = Either<AuthError, AuthUserModel>;
@@ -20,7 +21,11 @@ typedef FutureEitherLocalAuthUserOrAuthError
 
 //-------------------------USER-------------------------------------------------
 // typedef EitherFutureTrueOrUserError = Future<Either<UserError, bool>>;
+typedef EitherUserModelOrUserError = Either<UserError, UserModel>;
 typedef EitherBoolOrUserError = Either<UserError, bool>;
+
+typedef FutureEitherLocalUserModelOrAuthError
+    = Future<Either<AuthError, UserModel>>;
 
 // typedef FutureEitherLocalUserOrUserError = Future<Either<UserError, UserModel>>;
 // typedef FutureEitherUserOrUserError = Future<Either<UserError, UserModel>>;
